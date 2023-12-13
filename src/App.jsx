@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import UserList from './components/UserList/UserList.jsx';
+import { Box, Button, Flex, useDisclosure } from '@chakra-ui/react';
+import AddUserModal from './components/Modals/AddUserModal.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box as='main' padding={'20px 10px'}>
+      <Flex justifyContent={'flex-end'} marginBottom={'50px'}>
+        <Button size={'lg'} colorScheme='blue' variant='solid' onClick={onOpen}>
+          Add
+        </Button>
+      </Flex>
+      <UserList />
+      <AddUserModal isOpen={isOpen} onClose={onClose} />
+    </Box>
+  );
 }
 
-export default App
+export default App;
